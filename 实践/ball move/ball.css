@@ -1,0 +1,34 @@
+#ball{
+    position: absolute;
+    width:200px;
+    height:200px;
+    border:1px black solid;
+    background: blueviolet;
+    border-radius:50%;
+    animation:myfirst 10s linear;
+}
+#ball-process{
+    position: absolute;
+    width:200px;
+    height:5px;
+    background:firebrick;
+    top:100px;
+    /*animation :circle 10s linear 10s infinite normal ;*/
+}
+@keyframes myfirst{
+    0% { left:0px;}
+    2% {left:100px;}
+    4% {left:200px;}
+    6% {left:300px;}
+    8% {left:400px;}
+    10% {left:500px;}
+    25% { left:500px;transform:rotate(0deg);}
+    40% {left:500px;transform:rotate(180deg);}
+    55% {left:500px;transform:rotate(360deg);}
+    70% {left:500px;transform:rotate(540deg);}
+    85% {left:500px;transform:rotate(720deg);}
+    100% {left:500px;transform:rotate(900deg);}
+}
+@keyframes circle{
+
+}

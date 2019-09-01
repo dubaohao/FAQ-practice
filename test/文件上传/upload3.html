@@ -1,0 +1,95 @@
+<html>
+<head>
+	<!-- json multipart/form-data post上传 RequestBody MultipartFile接收 -->
+    <meta charset="utf-8">
+    <title>upload</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
+</head>
+<form id="upform" action="" method="" enctype="multipart/form-data">  
+          <br/>
+          <input id="file1" name="file" type ="file" /><br/> 
+<!--           <br/>
+          <input id="file2"  type ="file" name="myfile2"/><br/> 
+          <br/>
+          <input id="file3"  type ="file" name="myfile2"/><br/>  -->
+          <br/>
+          <input type="button" value="上传" onclick="upload()"/><br/>  
+          <input type="button" value="下载" onclick="download()"/><br/>  
+</form>
+
+</html>
+<!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="./jquery-3.3.1.js"></script>
+<script>
+	function upload() { 
+//方法1.
+		var file1 = document.getElementById("file1").files[0];
+		// var file2 = document.getElementById("file2").files[0]; 
+		// var file3 = document.getElementById("file3").files[0];  
+
+		formData = new FormData(); 
+		formData.append("file", file1); 
+		// formData.append("file2", file2); 
+		// formData.append("file3", file3); 
+//方法2.
+		// var formData = new FormData();
+	 //    formData.append("file1", $('#file1')[0].files[0]);
+	 //    formData.append("file2", $('#file2')[0].files[0]);
+	 //    formData.append("file3", $('#file3')[0].files[0]);
+
+		var url2=encodeURI("http://localhost:8080/TM/util/file");
+		 $.ajax({
+		 	type:'post',
+		 	url:url2,
+		 	dataType:'json',
+		 	cache: false,
+    		async: false,
+		 	processData: false,
+    		contentType: false,
+    		// mimeType:"multipart/form-data",
+		 	// contentType:'multipart/form-data;charset=utf-8',//不要加，画蛇添足，会报错
+		 	data:formData,
+		 	success:function(data){ 
+		 		console.log("data",data);
+		             alert(data.msg+"\n地址："+data.data);
+		            },
+		    error:function(result){
+		    	console.log("error",result);
+		 		alert(result);
+		 	}
+		});
+	 }
+	 function download() { 
+	 	url22="http://localhost:8080/TM/util/fileDownload?url=F:\Code\WWW2\Tm\src\main\uploadfile\UploadFileMain\(Ado.net小项目)第三天.pdf";
+		var url3=encodeURI(url22);
+		var filename = url22.substring(url22.lastIndexOf("\\") + 1);
+		var filetype = url22.substring(url22.lastIndexOf(".")+1);
+		var xhr = new XMLHttpRequest();
+	    xhr.open('GET', url3, true);        // 也可以使用POST方式，根据接口
+	    xhr.responseType = "blob";    // 返回类型blob
+	    // 定义请求完成的处理函数，请求前也可以增加加载框/禁用下载按钮逻辑
+	    xhr.onload = function () {
+	        // 请求完成
+	        if (this.status === 200) {
+	            // 返回200
+	            var blob = this.response;
+	            var reader = new FileReader();
+	            reader.readAsDataURL(blob);    // 转换为base64，可以直接放入a表情href
+	            reader.onload = function (e) {
+	                // 转换完成，创建一个a标签用于下载
+	                var a = document.createElement('a');
+	                a.download = filename;
+	                a.type = filetype;
+	                a.href = e.target.result;
+	                $("body").append(a);    // 修复firefox中无法触发click
+	                a.click();
+	                $(a).remove();
+	            }
+	        }
+	    };
+	    // 发送ajax请求
+	    xhr.send()
+	 }
+</script>

@@ -1,0 +1,24 @@
+#process{
+    width:600px;
+    height:50px;
+    background:gray;
+    border:1px black solid;
+    border-radius:25px 25px;
+}
+#css-process{
+    height:50px;
+    width:400px;
+    border-radius:25px 25px;
+    animation:ani 10s linear;
+}
+@keyframes ani{
+    from{
+        width:0%;
+        background:red;
+    }
+    to{
+        width:100%;
+        background:red;
+        animation-play-state: paused;
+    }
+}

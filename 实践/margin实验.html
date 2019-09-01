@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body{
+        display:flex;
+        margin-left:200px;
+        width:50%;
+        height:100%;
+        justify-content:center;
+        align-items: center;
+        padding:10px 10px 10px 10px ;
+        border:1px black solid;
+    }
+    #box1{
+        width:200px;
+        height:200px;
+        background: mediumvioletred;
+        border:1px red solid;
+    }
+    #box2{
+        width:200px;
+        height:200px;
+        background: gold;
+        border:1px green solid;
+        /* margin-left:-0px; */
+        margin-left:-100%;  /* 第2个的左边和第一的右边从相邻变成，距离600px，父元素的100%； */
+    }
+</style>
+<body>
+<div id="box1">1</div>
+<div id="box2"> 2</div>
+
+</body>
+</html>

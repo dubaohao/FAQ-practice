@@ -1,0 +1,36 @@
+body {
+    margin: 50px;
+    background-color: orange;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.tab-header {
+    width: 300px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #b9ef90;
+
+}
+.tab-header li {
+    width: 60px;
+    height: 100%;
+    float: left;
+    border-right: 1px solid #000;
+    text-align: center;
+    box-sizing: border-box;
+    cursor: pointer;
+
+}
+.tab-header li .active {
+    background-color: #6cf;
+}
+.tab-body {
+    width: 300px;
+    height: 150px;
+    padding: 10px;
+    background-color: #6cf;
+    box-sizing: border-box;
+}

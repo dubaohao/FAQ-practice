@@ -1,0 +1,58 @@
+<html>
+<!-- json post上传 RequestBody jsonString接收 -->
+<head>
+    <meta charset="utf-8">
+    <title>upload</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta http-equiv="Access-Control-Allow-Origin" content="*"> -->
+    <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
+</head>
+<!-- <form id="upform" action="" method="" enctype="multipart/form-data">   -->
+          <!-- <input id="file" type ="file" name="myfile1" id="myfile1"/><br/> -->
+          <br/>
+          <input id="file" type ="file" name="myfile2" id="myfile2"/><br/> 
+          <br/>
+          <input type="button" value="确定" onclick="upload()"/><br/>  
+<!-- </form> -->
+</html>
+<!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="./jquery-3.3.1.js"></script>
+<script>
+	function upload() { 
+	 var file = document.getElementById("file").files[0]; 
+	 var reader = new FileReader();
+	 reader.readAsDataURL(file);
+	 var base64;
+	 reader.onload=function(e){
+	 	base64 = e.target.result;
+	 	ajax(file,base64);
+
+	 }
+}
+function ajax(file,base64){
+	 	console.log(file);
+		 console.log(base64);
+		 var name=file.name.substr(0,file.name.lastIndexOf('.'));
+		 var type=file.name.substr(file.name.lastIndexOf('.')+1);
+		 console.log(name,type);
+		 var url1=encodeURI("http://39.107.58.68:8081/TM/util/upload");
+		 $.ajax({
+		 	type:'post',
+		 	url:url1,
+		 	dataType:'json',
+		 	contentType: 'application/json;charset=utf-8',
+		 	// contentType:'multipart/form-data;charset=utf-8',
+		 	data:JSON.stringify({"name":name,"base64":base64,"type":type,"caterId":1}),
+		 	success:function(data){ 
+		 		console.log("data",data);
+		             alert("\n地址："+data.list);
+		            },
+		    error:function(result){
+		    	console.log("error",result);
+		 		alert(result);
+		 	}
+		}); 
+		
+
+	 }
+</script>
